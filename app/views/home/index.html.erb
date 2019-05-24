@@ -1,0 +1,76 @@
+<br>
+<br>
+<h1>vue学習用ページ</h1>
+<h2>・双方向データバインディング</h2>
+お名前を入力してください
+  <div id="app">
+    <input v-model="message" type="text" placeholder="Name">
+    <p>Hello {{ message }} !</p>
+  </div>
+
+<h2>・クリックした時のイベント処理</h2>
+  <div id="app2">
+    <p>{{ message }}</p>
+    <button type="button" class="btn btn-primary" v-on:click="click1">日本語表示</button>
+    <button type="button" class="btn btn-primary" v-on:click="click2">英語表示</button>
+  </div>
+
+<h2>・フォーム入力処理と配列への追加</h2>
+フォームに文字を入力すると下のリストに追加されます
+<div id="app3">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="追加してください" v-model="add_car">
+    <div class="input-group-append">
+      <button class="btn btn-primary px-5" type="button" v-on:click="_add_car_name">追加</button>
+    </div>
+  </div>
+  <ul>
+    <li v-for="(car,index) in cars" class="list-group-item">
+      {{ index+1 + '. ' + car }}  
+    </li>
+  </ul>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    message: ''
+  }
+})
+
+new Vue({
+  el: '#app2',
+  data: {
+    message: 'Hello Vue.js!'
+  },
+  methods: {
+    click1: function () {
+      this.message = 'こんにちは　ビュー！'
+    },
+    click2: function () {
+      this.message = 'Hello Vue.js!'
+    }
+  }
+})
+
+new Vue({
+  el: '#app3',
+  data: {
+    add_car: "",
+    cars : [
+      "エクストレイル",
+      "フォレスター",
+      "ハリアー",
+      "CX-5",
+    ]
+  },
+  methods : {
+    _add_car_name : function(){
+      this.cars.push(this.add_car);
+      this.add_car = "";
+    }
+  }
+});
+</script>
+
